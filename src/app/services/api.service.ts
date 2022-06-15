@@ -1,3 +1,4 @@
+import { Users } from './../interface/user.interface';
 import { getUsers, login, meData } from './../../operations/query';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -16,18 +17,24 @@ export class ApiService {
 
   //Lista de usuarios
 
-  getUsers() {
+
+
+  public updateStateSession (newValue: boolean) {
+
+  }
+
+  getUsers() : Observable<Users>{
     return this.apollo
       .watchQuery({
         query: getUsers,
         fetchPolicy: 'network-only',
       })
       .valueChanges.pipe(
-        map((result: any) => {
+        map((result: ApolloQueryResult<Users>) => {
           // este result es la respuesta que trae de la api
           // valueChanges lee el resultado
 
-          return result.data.users;
+          return result.data;
         })
       );
   }

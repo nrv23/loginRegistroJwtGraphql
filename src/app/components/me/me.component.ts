@@ -1,3 +1,5 @@
+import { LoginGuard } from './../../guard/auth.guard';
+import { MeService } from './../../services/me.service';
 import { Router } from '@angular/router';
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,11 +15,9 @@ export class MeComponent implements OnInit {
  
   userData: MeData = null;
   
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private meService: MeService,private guard:LoginGuard) {
     
   }
-
-  
 
   ngOnInit(): void {
     this.loadDataUser();

@@ -19,24 +19,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private apiService: ApiService, private router: Router) {}
 
-  save() {
-    console.log(this.user);
-  }
-
+  
   login() {
-    /*
-    
-    //cargar los servicios 
-
-    this.apiService.getUsers()
-    .subscribe(response => {
-      console.log(response);
-    }, err => {
-      console.log(err);
-    })
-    
-    */
-
+   
     const { email, password } = this.user;
 
     this.apiService.login(email, password).subscribe(
