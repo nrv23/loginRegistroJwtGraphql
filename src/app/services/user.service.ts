@@ -1,14 +1,10 @@
+import { getToken } from 'src/utils/jwt';
 import { Apollo } from 'apollo-angular';
 import { addUser, updateUser } from '../../operations/mutation';
-import { Observable } from 'rxjs';
-import {
-  UserRegisterResponse,
-  UserUpdateResponse,
-} from '../interface/user.interface';
 import { Injectable } from '@angular/core';
 import User from '../models/user.model';
-import { ApolloQueryResult } from 'apollo-client';
-import { map } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
+
 addUser;
 @Injectable({
   providedIn: 'root',
@@ -16,26 +12,24 @@ addUser;
 export class UserService {
   constructor(private apollo: Apollo) {}
 
-
-
   addUser(user: User) {
-
-    return this.apollo
-      .mutate({
-        mutation: addUser,
-        variables: {user}
-      });
-      
+    return this.apollo.mutate({
+      mutation: addUser,
+      variables: { user },
+    });
   }
 
   //Observable<UserUpdateResponse>
 
   updateUser(user: User) {
-    return this.apollo
-      .mutate({
-        mutation: updateUser,
-        variables: {user},
-
+    return this.apollo.mutate({
+      mutation: updateUser,
+      context: {
+        headers: new HttpHeaders({
+          authorization: getToken(),
+        }),
+      },
+      variables: { user },
     });
   }
 }

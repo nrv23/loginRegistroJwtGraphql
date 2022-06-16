@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   // userlist: UserData[];
-  message: string = '';
+  
   formUser: User = {
     nombre: '',
     lastName: '',
@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
   status: boolean;
+  message: string = '';
 
   addUser(event: Event) {
     event.preventDefault(); // No propagar los eventos del submit para no refrescar el componente

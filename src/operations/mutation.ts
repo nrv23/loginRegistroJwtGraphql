@@ -23,7 +23,6 @@ export const updateUser = gql`
     update(user: $user) {
       status
       message
-      elementSelect
       ... on ResultUser {
         user {
           id
