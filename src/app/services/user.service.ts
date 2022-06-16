@@ -1,33 +1,41 @@
 import { Apollo } from 'apollo-angular';
-import { addUser } from '../../operations/mutation';
+import { addUser, updateUser } from '../../operations/mutation';
 import { Observable } from 'rxjs';
-import { UserResponse } from '../interface/user.interface';
+import {
+  UserRegisterResponse,
+  UserUpdateResponse,
+} from '../interface/user.interface';
 import { Injectable } from '@angular/core';
 import User from '../models/user.model';
 import { ApolloQueryResult } from 'apollo-client';
 import { map } from 'rxjs/operators';
-addUser
+addUser;
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private apollo: Apollo) {}
 
-  constructor(private apollo: Apollo) { }
 
-  addUser(user: User) : Observable<UserResponse> { 
+
+  addUser(user: User) {
+
     return this.apollo
-      .watchQuery({
-        query: addUser,
-        variables: user,
-        fetchPolicy: 'network-only',
-      })
-      .valueChanges.pipe(
-        map((result: ApolloQueryResult<UserResponse>) => {
-          // este result es la respuesta que trae de la api
-          // valueChanges lee el resultado
+      .mutate({
+        mutation: addUser,
+        variables: {user}
+      });
+      
+  }
 
-          return result.data;
-        })
-      );
+  //Observable<UserUpdateResponse>
+
+  updateUser(user: User) {
+    return this.apollo
+      .mutate({
+        mutation: updateUser,
+        variables: {user},
+
+    });
   }
 }

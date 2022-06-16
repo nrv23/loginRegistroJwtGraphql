@@ -1,10 +1,18 @@
 export default class User {
-  private nombre: string;
-  private lastName: string;
-  private email: string;
-  private password?: string;
 
+  public id?: number;
+  public nombre: string;
+  public lastName: string;
+  public email: string;
+  public password?: string;
+  public confirm_password?: string;
+
+  /*
   constructor() {}
+
+  public setId(id: number) {
+    this.id= id;
+  }
 
   public setNombre(nombre: string) {
     this.nombre = nombre;
@@ -37,4 +45,10 @@ export default class User {
   public get getPassword(): string {
     return this.password;
   }
+
+  public get getId(): number {
+
+    return this.id;
+  }
+  */
 }
